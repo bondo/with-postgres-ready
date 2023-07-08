@@ -1,0 +1,23 @@
+[package]
+name = "with_postgres_ready"
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/bondo/with-postgres-ready"
+documentation = "https://docs.rs/with_postgres_ready"
+readme = "README.md"
+description = """
+Helper for running tests with a Postgres database in a Docker container that is ready to accept connections.
+"""
+
+[dependencies]
+dockertest = "0.3.1"
+futures = "0.3.28"
+tokio = "1.29.1"
+tokio-postgres = "0.7.8"
+
+[dev-dependencies]
+env_logger = "0.10.0"
+test-log = { version = "0.2.12", features = ["trace"] }
+tracing = { version = "0.1.37", features = ["log"] }
+tracing-subscriber = { version = "0.3.17", features = ["env-filter"] }
