@@ -1,0 +1,33 @@
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Read version from Cargo.toml
+        id: current-version
+        uses: SebRollen/toml-action@v1.0.2
+        with:
+          file: "Cargo.toml"
+          field: "package.version"
+
+      - name: Check version in Cargo.toml matches tag
+        run: |
+          if [ "${{ github.ref_name }}" != "${{ steps.current-version.outputs.value }}" ]; then
+            echo "Tag does not match Cargo.toml version"
+            exit 1
+          fi
+
+      - name: Check semver
+        uses: obi1kenobi/cargo-semver-checks-action@v2
+
+      - name: Publish to crates.io
+        run: cargo publish --token ${CRATES_TOKEN}
+        env:
+          CRATES_TOKEN: ${{ secrets.CRATES_TOKEN }}
