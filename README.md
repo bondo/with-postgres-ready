@@ -24,7 +24,7 @@ To get more control, use the `Runner` builder:
 use with_postgres_ready::*;
 
 #[test_log::test]
-fn it_can_use_customer_timeout_and_tokio_postgres() {
+fn it_can_use_custom_connection_timeout() {
     Runner::new().connection_timeout(Duration::from_secs(5)).run(|url| async move {
         // Connect to the database using the url.
     });
