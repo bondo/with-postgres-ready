@@ -20,7 +20,7 @@ impl Default for Runner {
     fn default() -> Self {
         Self {
             container_tag: "15.3-alpine3.18",
-            container_timeout: Duration::from_secs(30),
+            container_timeout: Duration::from_secs(10),
             connection_timeout: Duration::from_secs(2),
             connection_test_interval: Duration::from_millis(100),
         }
@@ -46,7 +46,7 @@ impl Runner {
     /// Set the container timeout for the test.
     /// The test will fail if the container is not ready within this time.
     ///
-    /// Defaults to 30 seconds.
+    /// Defaults to 10 seconds.
     pub fn container_timeout(mut self, container_timeout: Duration) -> Self {
         self.container_timeout = container_timeout;
         self
